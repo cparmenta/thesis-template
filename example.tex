@@ -1,8 +1,10 @@
-\documentclass{thesis}
+\documentclass{cpa-thesis}
 \usepackage[english]{babel}
+\usepackage{blindtext}
 
 \title{Mauris lobortis ante sit amet justo interdum ac maximus tellus varius praesent sagittis lacus a}
-\author{Yo}
+% \setthesistitlefont{25}{22}
+\author{Me}
 \date{\today}
 
 \University{Universidad de Málaga}
@@ -11,15 +13,65 @@
     {John Doe}
 }
 
+\addbibresource{example.bib}
+
 \begin{document}
 
+    \pagenumbering{roman}
 
-\maketitle
+    \maketitle
 
-\chapter{Introduction}
+    \chapter*{Acknowledgements}
 
-Blablabla
+    Oi thanks for reading mate.
 
-$$ \exp{(j \omega t)} $$
+    \tableofcontents
 
+    \listoffigures
+
+    \listoftables
+    
+
+    \chapter{Introduction}
+    \pagenumbering{arabic}
+
+    Blablabla
+
+    \blindtext[5]
+
+    \begin{equation}
+        \exp{(j \omega t)}  \label{exp} 
+    \end{equation}
+
+    \section{First section}
+
+    \begin{figure}
+        \centering
+        \includegraphics[width=0.5\linewidth]{example-image-a}
+        \caption[Example image]{Example image for this template.}
+        \label{example-fig}
+    \end{figure}
+
+    \blindtext[5] And a reference to Fig. \ref{example-fig} and Eq. \ref{exp}. 
+
+    These are some random references \cite{einstein,knuth-fa,dirac} and a single one \cite{knuth-fa}.
+
+    \begin{table}
+        \centering
+        \begin{tabular}{ccc}
+            1 & 2 & 3 \\
+            4 & 5 & 6 \\
+            \hline
+        \end{tabular}
+        \caption[A table]{An example table.}
+        \label{example-table}
+    \end{table}
+
+    \appendix
+
+    \chapter{An appendix}
+
+    \blindtext
+
+    \printbibliography
 \end{document}

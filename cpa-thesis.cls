@@ -76,6 +76,11 @@
 
 \renewcommand{\baselinestretch}{1.1}
 
+% Protect toc margins from bad hyphenations exceeding margins
+\addtocontents{toc}{\protect\sloppy}
+\addtocontents{lof}{\protect\sloppy}
+\addtocontents{lot}{\protect\sloppy}
+
 
 % Redefine title page variables
 \def\University#1{\gdef\@University{#1}}

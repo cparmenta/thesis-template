@@ -48,6 +48,9 @@
 \RequirePackage{multicol}
 \RequirePackage{multirow}
 
+%% Include papers, other documents in pdf
+\RequirePackage{pdfpages}
+
 
 
 %% Default definitions

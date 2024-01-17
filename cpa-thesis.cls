@@ -55,7 +55,7 @@
 \def\@Faculty{Escuela Técnica Superior de Ingeniería de Telecomunicación}
 \def\@Program{Programa de doctorado en Ingeniería de Telecomunicación}
 
-\def\@ThesisType{Thesis by compendium of publications}
+\def\@ThesisType{Ph.D. Thesis}
 
 \def\@Advisors{%
     {Advisor 1} \\

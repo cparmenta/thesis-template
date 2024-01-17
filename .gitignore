@@ -1,3 +1,6 @@
+# Output pdfs (every pdf at root)
+/*.pdf
+
 ## Core latex/pdflatex auxiliary files:
 *.aux
 *.lof

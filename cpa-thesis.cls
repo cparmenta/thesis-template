@@ -132,7 +132,7 @@
         \fontsize{4cm}{1cm}\selectfont
         \bfseries
         \raisebox{0.7ex}{\fontsize{30}{30}\selectfont \textcolor{uma-blue}{\chaptertitlename}}%
-        \textcolor{uma-lblue}{\thechapter}% loading comment - please do not delete :)
+        \textcolor{uma-pink}{\thechapter}% loading comment - please do not delete :)
     }
 }
 {0.5ex}                     % sep

@@ -47,7 +47,7 @@
                 singlelinecheck=true]{caption} % Custom captions
 \RequirePackage{multicol}
 \RequirePackage{multirow}
-\RequirePackage[toc, acronym]{glossary}
+\RequirePackage[toc, acronym]{glossaries}
 
 %% Include papers, other documents in pdf
 \RequirePackage{pdfpages}

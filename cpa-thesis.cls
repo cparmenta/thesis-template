@@ -47,7 +47,8 @@
                 singlelinecheck=true]{caption} % Custom captions
 \RequirePackage{multicol}
 \RequirePackage{multirow}
-\RequirePackage[toc, acronym]{glossaries}
+\RequirePackage[toc, acronym, nopostdot]{glossaries}
+\RequirePackage{tocbibind}  % Add lof and lot to toc
 
 %% Include papers, other documents in pdf
 \RequirePackage{pdfpages}

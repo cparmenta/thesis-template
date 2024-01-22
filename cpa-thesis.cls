@@ -47,6 +47,7 @@
                 singlelinecheck=true]{caption} % Custom captions
 \RequirePackage{multicol}
 \RequirePackage{multirow}
+\RequirePackage{glossary}
 
 %% Include papers, other documents in pdf
 \RequirePackage{pdfpages}
@@ -97,6 +98,8 @@
     \gdef\@ThesisTitleFontSize{#1}
     \gdef\@ThesisTitleFontSkip{#2}
 }
+
+
 %% ---- Header style ------
 
 \def\chaptermark#1{%
@@ -159,6 +162,7 @@
 ]
 \titlespacing*{\chapter}{0pt}{0cm}{3.5cm}
 
+
 %% ------ Title page ------
 
 \renewcommand*{\maketitle}{%
@@ -198,6 +202,4 @@
 
     \end{titlepage}
 }
-
-%% ------ Papers ----------
 

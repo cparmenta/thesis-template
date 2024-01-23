@@ -24,7 +24,7 @@
 \RequirePackage{emptypage}
 \RequirePackage[explicit]{titlesec}
 \RequirePackage{xcolor}
-\RequirePackage[backend=biber, style=ieee, sorting=none, maxcitenames=99]{biblatex}
+\RequirePackage[backend=biber, style=numeric-comp, sorting=none, maxcitenames=99]{biblatex}
 \RequirePackage[pdftex,bookmarksnumbered,hidelinks]{hyperref} % Hyper-references
 \RequirePackage{url}
 \setcounter{biburllcpenalty}{7000}

@@ -17,9 +17,21 @@
 \RequirePackage{amsmath} 	% Paquetes estándar
 \DeclareMathAlphabet{\mathbfcal}{OMS}{cmsy}{b}{n}
 \RequirePackage{siunitx} 	% Paquete para magnitudes y unidades físicas
+\RequirePackage{csquotes}
+\RequirePackage{microtype}
 
 % Style and format
-\RequirePackage[a4paper, inner=3.18cm, outer=2.54cm, top=2.54cm, bottom=2.54cm]{geometry}  % APA Margins
+\RequirePackage[a4paper,
+                inner=3.18cm,
+                outer=2.54cm,
+                top=2.54cm,
+                bottom=2.54cm,
+                headheight=15pt
+                ]{geometry}  % APA Margins
+\renewcommand{\baselinestretch}{1.2}
+\RequirePackage[skip=2mm, indent=5mm]{parskip}
+% \renewcommand{\baselinestretch}{1.5} % Default line spacing
+
 \RequirePackage{fancyhdr}
 \RequirePackage{emptypage}
 \RequirePackage[explicit]{titlesec}
@@ -49,10 +61,26 @@
 \RequirePackage{multirow}
 \RequirePackage[toc, acronym, nopostdot]{glossaries}
 \RequirePackage{tocbibind}  % Add lof and lot to toc
+\RequirePackage{booktabs}
 
 %% Include papers, other documents in pdf
 \RequirePackage{pdfpages}
 
+
+%%%%%% OPTION PROCESSING %%%%%%%
+
+\DeclareOption{review}{%
+    \geometry{papersize={250mm,297mm},
+              inner=3.18cm,
+              outer=6.54cm,
+              top=2.54cm,
+              bottom=2.54cm,
+              headheight=15pt}
+    \renewcommand{\baselinestretch}{1.75} }
+\ProcessOptions\relax
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 %% Default definitions
@@ -75,8 +103,6 @@
 \definecolor{uma-pink}{HTML}{cc0066}    % -
 
 %% ------- Commands -------
-
-\renewcommand{\baselinestretch}{1.1}
 
 % Protect toc margins from bad hyphenations exceeding margins
 \addtocontents{toc}{\protect\sloppy}

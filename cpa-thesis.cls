@@ -16,6 +16,7 @@
 \let\circledS\undefined
 \RequirePackage{amsmath} 	% Paquetes estándar
 \DeclareMathAlphabet{\mathbfcal}{OMS}{cmsy}{b}{n}
+\RequirePackage{upgreek}
 \RequirePackage{siunitx} 	% Paquete para magnitudes y unidades físicas
 \RequirePackage{csquotes}
 \RequirePackage{microtype}

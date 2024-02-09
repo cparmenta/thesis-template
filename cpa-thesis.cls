@@ -3,6 +3,46 @@
 
 \LoadClass[12pt]{book}
 
+\RequirePackage[a4paper,
+                inner=3.18cm,
+                outer=2.54cm,
+                top=2.54cm,
+                bottom=2.54cm,
+                headheight=15pt
+                ]{geometry}  % APA Margins
+\renewcommand{\baselinestretch}{1.2}
+\RequirePackage[skip=2mm, indent=5mm]{parskip}
+%%%%%% OPTION PROCESSING %%%%%%%
+
+\newif\ifetsittfe
+\etsittfefalse
+
+\newif\ifusingspanish
+\usingspanishfalse
+
+\newif\ifusingminted
+\usingmintedfalse
+
+\DeclareOption{review}{%
+    \geometry{papersize={250mm,297mm},
+              inner=3.18cm,
+              outer=6.54cm,
+              top=2.54cm,
+              bottom=2.54cm,
+              headheight=15pt}
+    \renewcommand{\baselinestretch}{1.75} }
+
+\DeclareOption{etsit-tfe}{\etsittfetrue}
+
+\DeclareOption{spanish}{%
+    \usingspanishtrue
+    \@expandtwoargs\@removeelement{english}\@classoptionslist\@classoptionslist
+}
+
+\DeclareOption{minted}{\usingmintedtrue}
+
+\ProcessOptions\relax
+
 %% ------ Packages --------
 
 % Fonts and text
@@ -20,18 +60,13 @@
 \RequirePackage{siunitx} 	% Paquete para magnitudes y unidades físicas
 \RequirePackage{csquotes}
 \RequirePackage{microtype}
+\ifusingspanish
+    \RequirePackage[spanish, es-tabla]{babel}
+    \addto{\captionsspanish}{
+	\renewcommand{\contentsname}{Índice} }
+\fi
 
 % Style and format
-\RequirePackage[a4paper,
-                inner=3.18cm,
-                outer=2.54cm,
-                top=2.54cm,
-                bottom=2.54cm,
-                headheight=15pt
-                ]{geometry}  % APA Margins
-\renewcommand{\baselinestretch}{1.2}
-\RequirePackage[skip=2mm, indent=5mm]{parskip}
-% \renewcommand{\baselinestretch}{1.5} % Default line spacing
 
 \RequirePackage{fancyhdr}
 \RequirePackage{emptypage}
@@ -67,18 +102,11 @@
 %% Include papers, other documents in pdf
 \RequirePackage{pdfpages}
 
-
-%%%%%% OPTION PROCESSING %%%%%%%
-
-\DeclareOption{review}{%
-    \geometry{papersize={250mm,297mm},
-              inner=3.18cm,
-              outer=6.54cm,
-              top=2.54cm,
-              bottom=2.54cm,
-              headheight=15pt}
-    \renewcommand{\baselinestretch}{1.75} }
-\ProcessOptions\relax
+\ifusingminted
+    \RequirePackage{minted}
+    \usemintedstyle{perldoc}
+    \definecolor{dhscodebg}{rgb}{1,0.9922,0.95}
+\fi
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -91,10 +119,7 @@
 
 \def\@ThesisType{Ph.D. Thesis}
 
-\def\@Advisors{%
-    {Advisor 1} \\
-    {Advisor 2}
-}
+\def\@Supervisor{Advisor 1}
 
 %% Colors!
 \definecolor{uma-blue}{HTML}{002e5d}    % Pantone 648 C
@@ -117,7 +142,14 @@
 \def\Program#1{\gdef\@Program{#1}}
 \def\ThesisType#1{\gdef\@ThesisType{#1}}
 
-\def\Advisors#1{\gdef\@Advisors{#1}}
+\def\Supervisor#1{\gdef\@Supervisor{#1}}
+
+\newif\ifcosupervisor
+\cosupervisorfalse
+\newcommand{\CoSupervisor}[1]{%
+    \def\@CoSupervisor{#1}
+    \cosupervisortrue
+}
 
 \def\@ThesisTitleFontSize{28}
 \def\@ThesisTitleFontSkip{25}
@@ -191,43 +223,269 @@
 \titlespacing*{\chapter}{0pt}{0cm}{3.5cm}
 
 
+
+%% ---------- Abstract pages ------------
+
+\ifetsittfe
+    \def\@TitleES{<Título del TFE en español>}
+    \def\@TitleEN{<TFE title in english>}
+    
+    \ifusingspanish
+        \gdef\@title{\@TitleES}
+    \else
+        \gdef\@title{\@TitleEN}
+    \fi
+
+    \def\@AbstractES{%
+    Utilizar los siguientes comandos para completar esta página: 
+    \begin{description}
+        \item[\texttt{\char`\\titleES\{\}}] El título del TFE.
+        \item[\texttt{\char`\\author\{\}}] Nombre del autor/a.
+        \item[\texttt{\char`\\Supervisor\{\}}] Nombre del tutor/a.
+        \item[\texttt{\char`\\CoSupervisor\{\}}] Nombre del co-tutor/a.
+        \item[\texttt{\char`\\Department\{\}}] Nombre del departamento en el que se realiza el TFE.
+        \item[\texttt{\char`\\Program\{\}}] Titulación en la que está matriculado el autor.
+        \item[\texttt{\char`\\KeywordsES\{\}}] Lista de palabras clave en español separadas por comas.
+        \item[\texttt{\char`\\AbstractES\{\}}] Resumen en español. Se recomienda que no exceda esta página.
+    \end{description}
+    }
+    \def\@AbstractEN{%
+    Use the following commands to complete this page: 
+    \begin{description}
+        \item[\texttt{\char`\\titleEN\{\}}] Title of this work.
+        \item[\texttt{\char`\\title\{\}}] Author's name.
+        \item[\texttt{\char`\\Supervisor\{\}}] Supervisor's name.
+        \item[\texttt{\char`\\CoSupervisor\{\}}] Co-supervisor's name.
+        \item[\texttt{\char`\\Department\{\}}] Department in which this work has been realized.
+        \item[\texttt{\char`\\Program\{\}}] The university program.
+        \item[\texttt{\char`\\KeywordsEN\{\}}] List of keywords separated by commas.
+        \item[\texttt{\char`\\AbstractEN\{\}}] Abstract in english. It should not exceed this page.
+    \end{description}
+    }
+    \def\@Department{<Nombre del departamento>}
+    \def\@KeywordsES{Palabra clave 1, Palabra clave 2, Palabra clave 3}
+    \def\@KeywordsEN{Keyword 1, Keyword 2, Keyword 3}
+
+    \newcommand{\TitleES}[1]{\gdef\@TitleES{#1}}
+    \newcommand{\TitleEN}[1]{\gdef\@TitleEN{#1}}
+    \newcommand{\AbstractES}[1]{\gdef\@AbstractES{#1}}
+    \newcommand{\AbstractEN}[1]{\gdef\@AbstractEN{#1}}
+    \newcommand{\Department}[1]{\gdef\@Department{#1}}
+    \newcommand{\KeywordsES}[1]{\gdef\@KeywordsES{#1}}
+    \newcommand{\KeywordsEN}[1]{\gdef\@KeywordsEN{#1}}
+
+    \newcommand{\PrintAbstractES}{%
+        \begin{center}
+            \scshape
+            E.T.S. de Ingeniería de Telecomunicación, Universidad de Málaga
+        \end{center}
+        
+        \bigskip
+        
+        \begin{center}
+            \Large \scshape
+            \textbf{\@TitleES}
+        \end{center}
+        
+        \bigskip \bigskip \bigskip
+        
+        \begin{minipage}{0.9\textwidth}
+        
+        \textbf{Autor/a:} \@author
+        
+        \medskip
+        
+        \textbf{Tutor/a:} \@Supervisor
+        
+        \medskip
+        
+        \ifcosupervisor
+            \textbf{Co-supervisor:} \@CoSupervisor   
+            \medskip
+        \fi
+        
+        \textbf{Departamento:} \@Department
+        
+        \medskip
+        
+        \textbf{Titulación:} \@Program
+        
+        \medskip
+        
+        \textbf{Palabras clave:} \@KeywordsES
+        
+        \bigskip \bigskip
+        
+        \end{minipage}
+        
+        \begin{center}
+            \textbf{Resumen}
+        \end{center}
+        
+        \noindent
+        \@AbstractES
+        
+    }
+
+    \newcommand{\PrintAbstractEN}{%
+        \begin{center}
+            \scshape
+            E.T.S. de Ingeniería de Telecomunicación, Universidad de Málaga
+        \end{center}
+        
+        \bigskip
+        
+        \begin{center}
+            \Large \scshape
+            \textbf{\@TitleEN}
+        \end{center}
+        
+        \bigskip \bigskip \bigskip
+        
+        \begin{minipage}{0.9\textwidth}
+        
+        \textbf{Author:} \@author
+        
+        \medskip
+        
+        \textbf{Supervisor:} \@Supervisor
+     
+        \medskip
+
+        \ifcosupervisor
+            \textbf{Co-supervisor:} \@CoSupervisor   
+            \medskip
+        \fi
+        
+        %\textbf{Cotutor:} <Nombre del cotutor>\ (elimina esta línea si no hay cotutor)
+        %
+        %\medskip
+        
+        \textbf{Department:} \@Department
+        
+        \medskip
+        
+        \textbf{Degree:} \@Program
+        
+        \medskip
+        
+        \textbf{Keywords:} \@KeywordsEN
+        
+        \bigskip \bigskip
+        
+        \end{minipage}
+        
+        \begin{center}
+            \textbf{Abstract}
+        \end{center}
+        
+        \noindent
+        \@AbstractEN
+        
+    }
+\fi
+
 %% ------ Title page ------
 
-\renewcommand*{\maketitle}{%
-    \begin{titlepage}
-        %This to align on the left the text and on the right the image
-    \centering
+\ifetsittfe
+    \def\@City{Málaga}
+    \newcommand{\City}[1]{\gdef\@City{#1}}
 
-    \scshape 
-    \Large \@University \\
-    \large \@Faculty \\
-    \small \@Program \\
+    \renewcommand*{\maketitle}{%
+        \begin{titlepage}
+        \begin{center}
+            \Large \scshape
+            \@University\\
+            \bigskip
+            \@Faculty
+        \end{center}
 
-    \vspace{2cm}
-    \includegraphics[width=4cm]{assets/university.pdf}
-    \vspace{2cm}
+        \bigskip
 
-    \upshape \textcolor{uma-gray}{\MakeUppercase{\bfseries \@ThesisType}} \\
-    \vspace{2mm}
-    
+        \bigskip
 
-    \scshape \bfseries \fontsize{\@ThesisTitleFontSize}{\@ThesisTitleFontSkip}\selectfont \textcolor{uma-blue}{ \@title} \mdseries
+        \bigskip \bigskip \bigskip \bigskip
 
-    \vspace{3cm}
-    \upshape
-    \footnotesize \textbf{AUTHOR}\\
-    \large \@author \\
+        \begin{center}
+            \Large \scshape
+            \@ThesisType
+        \end{center}
 
-    \vspace{1cm}
+        \bigskip \bigskip \bigskip \bigskip
+
+        \begin{center}
+            \LARGE \scshape
+            \@title %Actualizar esta variable en A2.Preambulo.comandos.tex
+        \end{center}
+
+        \vfill
+
+        \begin{center}
+            \Large \scshape
+            \@Program
+        \end{center}
+
+        \vspace{3cm}
+    %	\vfill
 
 
-    \footnotesize \textbf{ADVISORS}\\
-    \large \@Advisors \\
+    %	{\large Málaga, \tfganno \hfill \tfgauthorname}
+        \begin{flushright}
+            \large \scshape
+            \@author \\%Actualizar esta variable en A2.Preambulo.comandos.tex
+            \@City, \@date %Actualizar esta variable en A2.Preambulo.comandos.tex
+        \end{flushright}
+        \end{titlepage}
+        
+        \cleardoublepage
+        \PrintAbstractES
+        \cleardoublepage
+        \PrintAbstractEN
+    }
+\else
+    \renewcommand*{\maketitle}{%
+        \begin{titlepage}
+            %This to align on the left the text and on the right the image
+        \centering
 
-    \vfill
-    \normalsize
-    \@date
+        \scshape 
+        \Large \@University \\
+        \large \@Faculty \\
+        \small \@Program \\
 
-    \end{titlepage}
-}
+        \vspace{2cm}
+        \includegraphics[width=4cm]{assets/university.pdf}
+        \vspace{2cm}
 
+        \upshape \textcolor{uma-gray}{\MakeUppercase{\bfseries \@ThesisType}} \\
+        \vspace{2mm}
+        
+
+        \scshape \bfseries \fontsize{\@ThesisTitleFontSize}{\@ThesisTitleFontSkip}\selectfont \textcolor{uma-blue}{ \@title} \mdseries
+
+        \vspace{3cm}
+        \upshape
+        \footnotesize \textbf{AUTHOR}\\
+        \large \@author \\
+
+        \vspace{1cm}
+
+
+        \footnotesize 
+            \ifcosupervisor
+                \textbf{SUPERVISORS}\\
+            \else
+                \textbf{SUPERVISOR}\\
+            \fi
+        \large \@Supervisor \\
+        \ifcosupervisor
+            \@CoSupervisor
+        \fi
+
+        \vfill
+        \normalsize
+        \@date
+
+        \end{titlepage}
+    }
+\fi

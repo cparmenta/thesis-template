@@ -1,17 +1,15 @@
-\documentclass{cpa-thesis}
-\usepackage[english]{babel}
+\documentclass[minted]{cpa-thesis}
 \usepackage{blindtext}
 
-\title{Mauris lobortis ante sit amet justo interdum ac maximus tellus varius praesent sagittis lacus a}
+\title{<Thesis title>}
 % \setthesistitlefont{25}{22}
-\author{Me}
+
+\author{<Author name>}
 \date{\today}
 
-\University{Universidad de Málaga}
-\Advisors{%
-    {Menganito Pérez} \\
-    {John Doe}
-}
+\University{<University name>}
+\Supervisor{<Supervisor's name>}
+\CoSupervisor{<Co-supervisor's name>} % Remove if not needed
 
 \addbibresource{example.bib}
 
@@ -23,7 +21,7 @@
 
     \chapter*{Acknowledgements}
 
-    Oi thanks for reading mate.
+    Thanks for using my template!
 
     \tableofcontents
 
@@ -68,6 +66,21 @@
         \caption[A table]{An example table.}
         \label{example-table}
     \end{table}
+
+    A code snippet example:
+    \begin{minted}[
+        style=perldoc,
+        fontsize=\footnotesize,
+        bgcolor=dhscodebg,
+        linenos,
+        frame=lines
+    ]{python}
+class Example():
+    def test():
+        print('Hello world')
+
+Example().test()
+    \end{minted}
 
     \appendix
 

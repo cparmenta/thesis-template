@@ -81,7 +81,6 @@
 
 % Figures, tables, captions...
 \RequirePackage{graphicx}
-\RequirePackage{subfigure}
 \RequirePackage[format=plain,
                 labelformat=default,
                 labelsep=quad,
@@ -93,6 +92,7 @@
                 parindent=0pt,
                 hangindent=0pt,
                 singlelinecheck=true]{caption} % Custom captions
+\RequirePackage{subcaption}
 \RequirePackage{multicol}
 \RequirePackage{multirow}
 \RequirePackage[toc, acronym, nopostdot]{glossaries}
@@ -300,7 +300,7 @@
         \medskip
         
         \ifcosupervisor
-            \textbf{Co-supervisor:} \@CoSupervisor   
+            \textbf{Co-tutor:} \@CoSupervisor   
             \medskip
         \fi
         

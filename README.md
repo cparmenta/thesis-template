@@ -73,7 +73,6 @@ Replace the `assets/university.pdf` file to change the logo at the title page.
 - url
 
 - graphicx
-- subfigure
 - caption (
     - format=plain,
     - labelformat=default,
@@ -87,6 +86,7 @@ Replace the `assets/university.pdf` file to change the logo at the title page.
     - hangindent=0pt,
     - singlelinecheck=true
     )
+- subcaption
 - multicol
 - multirow
 - glossaries (toc, acronym, nopostdot)

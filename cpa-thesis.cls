@@ -72,7 +72,8 @@
 \RequirePackage{emptypage}
 \RequirePackage[explicit]{titlesec}
 \RequirePackage{xcolor}
-\RequirePackage[backend=biber, style=numeric-comp, sorting=none, maxcitenames=99]{biblatex}
+\RequirePackage{tcolorbox}
+\RequirePackage[backend=biber, style=ieee, citestyle=numeric-comp, sorting=none, maxcitenames=99, maxbibnames=99]{biblatex}
 \RequirePackage[pdftex,bookmarksnumbered,hidelinks]{hyperref} % Hyper-references
 \RequirePackage{url}
 \setcounter{biburllcpenalty}{7000}
@@ -160,6 +161,43 @@
 }
 
 
+%% ---- Highlight author in fullcite ----- %%
+% Source: https://tex.stackexchange.com/questions/445029/higlight-a-desired-n-th-author-in-fullcites-in-cleanthesis
+
+\newcommand*{\resetnamehighlights}{\let\nhcbx@highlightlist\@empty}
+\resetnamehighlights
+
+\newcommand*{\highlightnames}{%
+  \@ifstar{\resetnamehighlights\highlightnames@add}{\highlightnames@add}}
+
+\newcommand*{\highlightnames@add@inner}[2]{%
+  \listeadd{#1}{\the\numexpr#2\relax}}
+
+\newcommand*{\highlightnames@add}{%
+  \forcsvlist{\highlightnames@add@inner\nhcbx@highlightlist}}
+
+\newcommand*{\mkbibhighlightnthname}[1]{%
+  \xifinlist{\the\value{listcount}}{\nhcbx@highlightlist}
+    {\mkbibbold{#1}}
+    {#1}}
+
+\DeclareNameWrapperFormat{highlightnthname}{%
+  \renewcommand*{\mkbibcompletename}{\mkbibhighlightnthname}%
+  #1}
+
+
+\DeclareCiteCommand{\fullcite}
+  {\usebibmacro{prenote}}
+  {\usedriver
+     {\DeclareNameWrapperAlias{author}{highlightnthname}%
+      \DeclareNameWrapperAlias{editor}{highlightnthname}%
+      \DeclareNameWrapperAlias{translator}{highlightnthname}%
+      \DeclareNameWrapperAlias{sortname}{highlightnthname}}
+     {\thefield{entrytype}}}
+  {\multicitedelim}
+  {\usebibmacro{postnote}}
+
+
 %% ---- Header style ------
 
 \def\chaptermark#1{%
@@ -175,6 +213,10 @@
 \fancyhead[LE,RE,LO,RO]{}
 \fancyfoot[CE, CO]{}
 \fancyfoot[RO, LE]{\thepage}}
+
+\fancypagestyle{bibliography}{%
+  \fancyhead[RO,LE]{\textcolor{uma-gray}{Bibliography}}%
+}
 
 \pagestyle{fancy}
     \fancyfoot[RO, LE]{\thepage}

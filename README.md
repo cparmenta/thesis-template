@@ -68,7 +68,15 @@ Replace the `assets/university.pdf` file to change the logo at the title page.
 - emptypage
 - titlesec (explicit)
 - xcolor
-- biblatex (backend=biber, style=numeric-comp, sorting=none, maxcitenames=99)
+- tcolorbox
+- biblatex (
+    - backend=biber,
+    - style=ieee,
+    - citestyle=numeric-comp,
+    - sorting=none,
+    - maxcitenames=99,
+    - maxbibnames=99
+    )
 - hyperref (pdftex,bookmarksnumbered,hidelinks)
 - url
 
@@ -96,6 +104,7 @@ Replace the `assets/university.pdf` file to change the logo at the title page.
 
 ## Miscelaneous
 
+### Colors
 The following colors are defined:
 - `uma-blue`: #002e5d (Pantone 648 C)
 - `uma-lblue`: #00aec7 (Pantone 3125 C)
@@ -106,4 +115,22 @@ The following colors are defined:
 Example usage:
 ```latex
 \textcolor{uma-pink}{emphasized text}
+```
+
+### Bibliography
+
+- Fullcite and highlight
+When using the `\fullcite` command, it is possible to highlight the nth author(s). [[Source](https://tex.stackexchange.com/questions/445029/higlight-a-desired-n-th-author-in-fullcites-in-cleanthesis)]
+
+```latex
+\highlightnames{<author number>}  % Can be used more than once
+\highlightnames*{<author number>} % Reset the hightlight list before appending the number
+\resetnamehightlights             % Self-explanatory
+```
+
+- Header style
+The fancypage style "bibliography" is defined. When printing the bibliography use:
+```latex
+\clearpage \pagestyle{bibliography}
+\printbibliography
 ```

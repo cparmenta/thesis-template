@@ -97,7 +97,7 @@
 \RequirePackage{multicol}
 \RequirePackage{multirow}
 \RequirePackage[toc, acronym, nopostdot]{glossaries}
-\RequirePackage{tocbibind}  % Add lof and lot to toc
+\RequirePackage[nottoc]{tocbibind}  % Add lof and lot to toc
 \RequirePackage{booktabs}
 
 %% Include papers, other documents in pdf

@@ -1,6 +1,9 @@
 # Output pdfs (every pdf at root)
 /*.pdf
 
+# VSCode Latex Workshop
+*SAVE-ERROR
+
 ## Core latex/pdflatex auxiliary files:
 *.aux
 *.lof

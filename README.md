@@ -120,6 +120,7 @@ Example usage:
 ### Bibliography
 
 - Fullcite and highlight
+
 When using the `\fullcite` command, it is possible to highlight the nth author(s). [[Source](https://tex.stackexchange.com/questions/445029/higlight-a-desired-n-th-author-in-fullcites-in-cleanthesis)]
 
 ```latex
@@ -129,6 +130,7 @@ When using the `\fullcite` command, it is possible to highlight the nth author(s
 ```
 
 - Header style
+
 The fancypage style "bibliography" is defined. When printing the bibliography use:
 ```latex
 \clearpage \pagestyle{bibliography}
